@@ -1,6 +1,9 @@
 # traffic-radar
 This project is a traffic speed and volume data-logger utilizing an [OmniPreSense OPS243-A](https://omnipresense.com/product/ops243-doppler-radar-sensor/) dopplar radar and an [Arduino MKR Zero](https://docs.arduino.cc/hardware/mkr-zero). Full schematics and source code coming soon. In the meantime, check out the BOM below. 
 
+## System Schematic
+![system schematic](traffic-radar.svg)
+
 ## BOM
 As a rough estimate, my total cost to build this system is about $350.
 - [OmniPreSense OPS243-A](https://omnipresense.com/product/ops243-doppler-radar-sensor/) (make sure you get the non-wifi version, part number OPS243-A-CW-RP)
