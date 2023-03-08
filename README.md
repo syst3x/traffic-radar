@@ -30,7 +30,10 @@ At the top of the [Arduino source code file](traffic-radar.ino) are several cons
 With this in mind, here is how the following constants will control system operation:
 - `hibernate` set to true to enable hiberation and put the radar in a low-power state occasionally to reduce system power consumption
 - `lateDataTimeThreshold` this is how long to wait, in miliseconds, after the most recent radar data has been received before entering hibernation
-- `sleepTime` this is how long the radar will spend in its low-power state before waking back up 
+- `sleepTime` this is how long the radar will spend in its low-power state before waking back up
+- `minOnTime` this is the minimum amount of time that the radar will stay on before it's allowed to go back to sleep
+- `timeStartThreshold` this is the longest that a constant stream of radar speeds will be considered a single vehicle before chopping the stream and logging a datapoint
+- `timeLastThreshold` during a stream of radar speeds, this is the longest we can go without getting a new speed reading before we assume that the vehicle has passed and we log a datapoint
 
 ```
 ////////////////////////////////////////////////////////////////////////////
