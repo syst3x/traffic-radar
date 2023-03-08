@@ -21,7 +21,16 @@ As a rough estimate, my total cost to build this system is about $350.
 - Breadboard or perfboard, as well as wires or jumpers to hold and connect the Arduino with the RTC module and the radar board
 
 ## Arduino code
-At the top of the [Arduino source code file](traffic-radar.ino) are several constants that can be modified to suit your particular installation and adjust how the radar system operates.
+At the top of the [Arduino source code file](traffic-radar.ino) are several constants that can be modified to suit your particular installation and adjust how the radar system operates. The basic operation is this:
+  1. The Arduino will read incoming serial data from the radar whenever a vehicle moves through its line-of-site.
+  2. We keep track of the current maximum observed speed in both the inbound and outbound directions, but terminate a single vehicle capture and log a datapoint if we go a long enough time without a new speed datapoint or if the total capture time exceeds the threshold.
+  3. If we go long enough without receiving radar data, we put the radar into a low-power state for a specified amount of time. Upon wakeup, we mandate that the radar stays awake and searching for a vehicle for a minimum amount of time before it's allowed to sleep again. This sleep/wakeup process is referred to as "hibernation", and is able to reduce total system power consumption and extend runtimes.
+  4. Every 10 seconds, we flush the SD card buffer and write all logged datapoints. This ensures that when the system battery dies or is disconnected, we will lose at most the last 10 seconds of data.
+
+With this in mind, here is how the following constants will control system operation:
+- `hibernate` set to true to enable hiberation and put the radar in a low-power state occasionally to reduce system power consumption
+- `lateDataTimeThreshold` this is how long to wait, in miliseconds, after the most recent radar data has been received before entering hibernation
+- `sleepTime` this is how long the radar will spend in its low-power state before waking back up 
 
 ```
 ////////////////////////////////////////////////////////////////////////////
