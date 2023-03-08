@@ -21,7 +21,7 @@ As a rough estimate, my total cost to build this system is about $350.
 - Breadboard or perfboard, as well as wires or jumpers to hold and connect the Arduino with the RTC module and the radar board
 
 ## Arduino code
-At the top of the Arduino source code ("traffic-radar.ino") are several constants that can be modified to suit your particular installation and adjust how the radar system operates.
+At the top of the [Arduino source code file](traffic-radar.ino) are several constants that can be modified to suit your particular installation and adjust how the radar system operates.
 
 ```
 ////////////////////////////////////////////////////////////////////////////
