@@ -19,3 +19,26 @@ As a rough estimate, my total cost to build this system is about $350.
   - Depending on where you intend to install your traffic radar, you may want a [pole mounting kit](https://www.amazon.com/gp/product/B0B4DW4HFM) for the enclosure
 - USB cable (from battery pack to Aruidno)
 - Breadboard or perfboard, as well as wires or jumpers to hold and connect the Arduino with the RTC module and the radar board
+
+## Arduino code
+At the top of the Arduino source code ("traffic-radar.ino") are several constants that can be modified to suit your particular installation and adjust how the radar system operates.
+
+```
+////////////////////////////////////////////////////////////////////////////
+// modify these values to control behavior
+////////////////////////////////////////////////////////////////////////////
+
+// set to true to enable hibernation behavior
+const boolean hibernate = true;
+// if we haven't recieved a data packet in this many mS, we'll sleep
+const int lastDataTimeThreshold = 1500;
+// how long to sleep (keep in mind how long a vehicle will spend in view of
+// your radar and set this value comfortably lower than this)
+const int sleepTime = 750;
+// at minimum, how long should the radar stay on after waking up from sleep
+const int minOnTime = 1000;
+//longest time a car could be in view of sensor before we record a datapoint
+const int timeStartThreshold = 3500;
+//log and reset if we haven't had a speed reading in this long
+const int timeLastThreshold = 650;
+```
