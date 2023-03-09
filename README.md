@@ -16,8 +16,8 @@ As a rough estimate, my total cost to build this system is about $350.
 - 18650 Li-ion cells (I bought 16x [Samsung 35E cells](https://www.18650batterystore.com/collections/18650-batteries/products/samsung-35e), but the battery pack listed above can be used with as few cells as you want)
 - Waterproof enclosure
   - Based on the 18650 enclosure I bought, I purchased this [QILIPSU 8.6" x 6.7" x 4.3"](https://www.amazon.com/dp/B085QCT543) enclosure, which fits the battery pack perfectly. Note, you will need a [slim 90 degree USB adapter](https://www.amazon.com/dp/B0BVJXN99B) in order to get the battery pack to fit. There's enough extra room with this combination of enclosure + battery pack to be able to fit a second battery pack for double the runtime, since these packs support pass-through charging (you'd connect the output of the first to the input of the second, and the output of the second to the Arduino).
-  - Depending on where you intend to install your traffic radar, you may want a [pole mounting kit](https://www.amazon.com/gp/product/B0B4DW4HFM) for the enclosure
-- (optional) Lock for waterproof enclosure. If you use the QILIPSU enclosure listed above and you want to be able to lock it, you'll need a padlock with a 5/32" shackle diameter. I use [this one](https://www.amazon.com/dp/B00004SQL5).
+  - (optional) Depending on where you intend to install your traffic radar, you may want a [pole mounting kit](https://www.amazon.com/gp/product/B0B4DW4HFM) for the enclosure
+  - (optional) Lock for waterproof enclosure. If you use the QILIPSU enclosure listed above and you want to be able to lock it, you'll need a padlock with a 5/32" shackle diameter. I use [this one](https://www.amazon.com/dp/B00004SQL5).
 - USB cable (from battery pack to Aruidno)
 - Breadboard or perfboard, as well as wires or jumpers to hold and connect the Arduino with the RTC module and the radar board
 
