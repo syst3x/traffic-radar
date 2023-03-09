@@ -55,3 +55,8 @@ const int timeStartThreshold = 3500;
 //log and reset if we haven't had a speed reading in this long
 const int timeLastThreshold = 650;
 ```
+
+## Reference Documents
+1. [OmniPreSense OPS243 API user guide](https://omnipresense.com/wp-content/uploads/2021/09/AN-010-X_API_Interface.pdf)
+2. [Arduino MKRZero documentation](https://docs.arduino.cc/hardware/mkr-zero)
+3. [Radar speed cosine error adjustment](https://omnipresense.com/wp-content/uploads/2018/10/AN-011_Cosine-Error.pdf)
