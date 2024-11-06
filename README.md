@@ -33,9 +33,9 @@ As a rough estimate, my total cost to build this system is about $350.
 
 ## Arduino code
 At the top of the [Arduino source code file](traffic-radar.ino) are several constants that can be modified to suit your particular installation and adjust how the radar system operates. The basic operation is this:
-  1. The Arduino will read incoming serial data from the radar whenever a vehicle moves through its line-of-sight.
-  2. We keep track of the current maximum observed speed in both the inbound and outbound directions, but terminate a single vehicle capture and log a datapoint if we go a long enough time without a new speed datapoint or if the total capture time exceeds the threshold.
-  3. If we go long enough without receiving radar data, we put the radar into a low-power state for a specified amount of time. Upon wakeup, we mandate that the radar stays awake and searching for a vehicle for a minimum amount of time before it's allowed to sleep again. This sleep/wakeup process is referred to as "hibernation", and is able to reduce total system power consumption and extend runtimes.
+  1. The Arduino will read incoming serial data from the radar whenever a vehicle moves through its line-of-sight. Each datapoint is called a "frame".
+  2. We keep track of the current maximum observed speed in both the inbound and outbound directions, but terminate a single vehicle capture (set of "frames") and log a datapoint (called "vehicle") if we go a long enough time without a new frame or if the total capture time exceeds the threshold.
+  3. If we go long enough without receiving a frame, we put the radar into a low-power state for a specified amount of time. Upon wakeup, we mandate that the radar stays awake and searching for a vehicle for a minimum amount of time before it's allowed to sleep again. This sleep/wakeup process is referred to as "hibernation", and is able to reduce total system power consumption and extend runtimes.
   4. Every 10 seconds, we flush the SD card buffer and write all logged datapoints. This ensures that when the system battery dies or is disconnected, we will lose at most the last 10 seconds of data.
 
 With this in mind, here is how the following constants will control system operation:
@@ -45,6 +45,7 @@ With this in mind, here is how the following constants will control system opera
 - `minOnTime` this is the minimum amount of time that the radar will stay on before it's allowed to go back to sleep
 - `timeStartThreshold` this is the longest that a constant stream of radar speeds will be considered a single vehicle before chopping the stream and logging a datapoint
 - `timeLastThreshold` during a stream of radar speeds, this is the longest we can go without getting a new speed reading before we assume that the vehicle has passed and we log a datapoint
+- `logAll` if set to true, log both "frames" and "vehicles" to the CSV data file; if set to folse, log only "vehicles"
 
 ```
 ////////////////////////////////////////////////////////////////////////////
@@ -57,13 +58,18 @@ const boolean hibernate = true;
 const int lastDataTimeThreshold = 1500;
 // how long to sleep (keep in mind how long a vehicle will spend in view of
 // your radar and set this value comfortably lower than this)
-const int sleepTime = 750;
+const int sleepTime = 400;
+//const int sleepTime = 750;
 // at minimum, how long should the radar stay on after waking up from sleep
-const int minOnTime = 1000;
+const int minOnTime = 750;
 //longest time a car could be in view of sensor before we record a datapoint
-const int timeStartThreshold = 3500;
+const int timeStartThreshold = 15000;
 //log and reset if we haven't had a speed reading in this long
-const int timeLastThreshold = 650;
+const int timeLastThreshold = 600;
+// magnitude change threshold (e.g., trailing car will cause step drop in inbound magnitude when picked up)
+const int magThreshold = 200;
+// log ALL datapoints?
+const boolean logAll = true;
 ```
 
 ## Reference Documents
