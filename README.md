@@ -1,6 +1,16 @@
 # traffic-radar
 This project is a traffic speed and volume data-logger utilizing an [OmniPreSense OPS243-A](https://omnipresense.com/product/ops243-doppler-radar-sensor/) dopplar radar and an [Arduino MKR Zero](https://docs.arduino.cc/hardware/mkr-zero). Full schematics and source code coming soon. In the meantime, check out the BOM below. 
 
+<img src="radar_box.jpeg" width="450">
+<br>
+Photo of radar box. Once closed, this gets mounted outside on a telephone or utility pole to collect traffic speed and volume data.
+<br><br>
+
+<img src="traffic_speed.png" height="250">  <img src="traffic_volume.png" height="250">
+<br>
+Example processed data from an early live test.
+<br><br>
+
 ## System Schematic
 The traffic radar system is powered through the Arduino. The Arduino is connected to the battery bank via a USB cable. The DS3231 real-time clock module is connected to the Arduino via four wires-- two for power and two for data. The RTC is powered using the 3.3V output from the Arduino, and the data lines are connected to the Arduino I2C pins (SDA connects to SDA and SCL connects to SCL). The OPS243 radar board is also connected to the arduino via four wires-- two for power and two for data. The radar board is connected via the 5V output from the Arduino, and the data lines are connected to the Arduino hardware serial pins (RX/TX). Make sure that the radar TX connects to the Arduino RX, and the radar RX connects to the Arduino TX.
 
